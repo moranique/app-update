@@ -95,7 +95,7 @@ public class AppUpdatePlugin extends Plugin {
         String updateVersion = call.getString("updateVersion");
 
         File sourceFile = new File(getActivity().getApplicationContext().getExternalFilesDir(null), fileName);
-        File destPath = new File(getActivity().getApplicationContext().getFilesDir(), "penpencil-updates");
+        File destPath = new File(getActivity().getApplicationContext().getFilesDir(), "ionic_built_snapshots");
         String updateUrl = destPath.getAbsolutePath() + "/" + updateVersion + "/www";
         if (!destPath.exists()) {
             destPath.mkdir();
