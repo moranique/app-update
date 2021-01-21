@@ -30,7 +30,7 @@ public class AppUpdatePlugin: CAPPlugin {
         let modelName = UIDevice.current.model
         let updateVersion = pref.string(forKey: "updateVersion") ?? ""
         let updateStatus = pref.string(forKey: "updateStatus")
-        let updateUrl = documentsUrl.appendingPathComponent("NoCloud/penpencil-updates/" + updateVersion + "/www")//pref.string(forKey: "updateUrl")
+        let updateUrl = documentsUrl.appendingPathComponent("NoCloud/ionic_built_snapshots/" + updateVersion + "/www")//pref.string(forKey: "updateUrl")
 
         let successData:[String: Any] = [
                 "version": buildNumber ?? "",
@@ -105,8 +105,8 @@ public class AppUpdatePlugin: CAPPlugin {
 
         let documentsUrl =  FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first!
         let sourcesUrl = documentsUrl.appendingPathComponent("NoCloud/" + fileName)
-        let destinationUrl = documentsUrl.appendingPathComponent("NoCloud/penpencil-updates/" + updateVersion)
-        let updateUrl = "NoCloud/penpencil-updates/" + updateVersion + "/www"
+        let destinationUrl = documentsUrl.appendingPathComponent("NoCloud/ionic_built_snapshots/" + updateVersion)
+        let updateUrl = "NoCloud/ionic_built_snapshots/" + updateVersion + "/www"
 
         let deleteSource = sourcesUrl.absoluteURL
 
@@ -124,7 +124,7 @@ public class AppUpdatePlugin: CAPPlugin {
             ]
             self.updateUserPref(data: data);
             try FileManager.default.removeItem(at: deleteSource);
-            removExtraUpdates();
+            removeExtraUpdates();
             call.resolve();
         } catch {
             print("AppUpdateService",  "Extraction of ZIP archive failed with error:\(error)")
@@ -137,40 +137,11 @@ public class AppUpdatePlugin: CAPPlugin {
         }
     }
 
-//    func loadFileSync(url: URL, completion: @escaping (String?, Error?) -> Void) {
-//        let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-//
-//        let destinationUrl = documentsUrl.appendingPathComponent(url.lastPathComponent)
-//
-//        if FileManager().fileExists(atPath: destinationUrl.path)
-//        {
-//            print("AppUpdateService","File already exists [\(destinationUrl.path)]")
-//            completion(destinationUrl.path, nil)
-//        }
-//        else if let dataFromURL = NSData(contentsOf: url)
-//        {
-//            if dataFromURL.write(to: destinationUrl, atomically: true)
-//            {
-//                print("AppUpdateService","file saved [\(destinationUrl.path)]")
-//                completion(destinationUrl.path, nil)
-//            }
-//            else
-//            {
-//                print("AppUpdateService","error saving file")
-//                let error = NSError(domain:"Error saving file", code:1001, userInfo:nil)
-//                completion(destinationUrl.path, error)
-//            }
-//        }
-//        else
-//        {
-//            let error = NSError(domain:"Error downloading file", code:1002, userInfo:nil)
-//            completion(destinationUrl.path, error)
-//        }
-//    }
-
     func loadFileAsync(url: URL, completion: @escaping (String?, Error?) -> Void) {
         let documentsUrl =  FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first!
         let destinationUrl = documentsUrl.appendingPathComponent("NoCloud/" + url.lastPathComponent)
+
+        try? FileManager().createDirectory(at: documentsUrl.appendingPathComponent("NoCloud"), withIntermediateDirectories: true, attributes: [:])
 
         if FileManager().fileExists(atPath: destinationUrl.path) {
             print("AppUpdateService","File already exists [\(destinationUrl.path)]")
@@ -223,12 +194,12 @@ public class AppUpdatePlugin: CAPPlugin {
         }
     }
 
-    func removExtraUpdates() {
+    func removeExtraUpdates() {
         let pref = UserDefaults.standard
         let currentUpdateVersion = pref.string(forKey: "updateVersion")!
         let fileManager = FileManager.default
         let documentsURL = fileManager.urls(for: .libraryDirectory, in: .userDomainMask).first!
-        let penpeencilUpdateDir = documentsURL.appendingPathComponent("NoCloud/penpencil-updates/")
+        let penpeencilUpdateDir = documentsURL.appendingPathComponent("NoCloud/ionic_built_snapshots/")
         do {
             let fileURLs = try fileManager.contentsOfDirectory(at: penpeencilUpdateDir, includingPropertiesForKeys: nil)
             let count = fileURLs.count
