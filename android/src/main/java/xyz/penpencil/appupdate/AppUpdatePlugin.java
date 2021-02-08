@@ -97,7 +97,7 @@ public class AppUpdatePlugin extends Plugin {
 
         File sourceFile = new File(getActivity().getApplicationContext().getExternalFilesDir(null), fileName);
         File destPath = new File(getActivity().getApplicationContext().getFilesDir(), "ionic_built_snapshots");
-        String updateUrl = destPath.getAbsolutePath() + "/" + updateVersion + "/www";
+        String updateUrl = destPath.getAbsolutePath() + "/" + updateVersion;
         if (!destPath.exists()) {
             destPath.mkdir();
         }
