@@ -115,6 +115,7 @@ public class AppUpdatePlugin: CAPPlugin {
         print("AppUpdateService", "updateUrl", updateUrl);
 
         do {
+            try FileManager.default.createDirectory(at: destinationUrl, withIntermediateDirectories: true, attributes: [:])
             try Zip.unzipFile(sourcesUrl, destination: destinationUrl, overwrite: true, password: "")
             self.notifyListeners("appUpdateLive", data: [:])
             let data: [String] = [
