@@ -2,6 +2,11 @@ import { WebPlugin } from '@capacitor/core';
 import { AppInfoModal, AppUpdatePluginPlugin } from './definitions';
 export declare class AppUpdatePluginWeb extends WebPlugin implements AppUpdatePluginPlugin {
     constructor();
+    checkUpdatePath(options: {
+        path: string;
+    }): Promise<{
+        valid: boolean;
+    }>;
     copyAndExtractFile(options: {
         fileName: string;
         updateVersion: string;

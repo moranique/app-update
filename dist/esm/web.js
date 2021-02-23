@@ -15,6 +15,12 @@ export class AppUpdatePluginWeb extends WebPlugin {
             platforms: ['web']
         });
     }
+    checkUpdatePath(options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(options);
+            return undefined;
+        });
+    }
     copyAndExtractFile(options) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(options);
