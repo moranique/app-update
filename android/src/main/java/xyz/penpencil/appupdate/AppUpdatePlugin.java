@@ -51,7 +51,7 @@ public class AppUpdatePlugin extends Plugin {
     }
 
     @PluginMethod()
-    public void checkUpdate(PluginCall call) {
+    public void checkUpdatePath(PluginCall call) {
         String path = call.getString("path");
         String realPath = path.replace(Bridge.CAPACITOR_FILE_START, "");
         File localFile = new File(realPath);

@@ -9,7 +9,7 @@ export class AppUpdatePluginWeb extends WebPlugin implements AppUpdatePluginPlug
         });
     }
 
-    async checkUpdate(options: { path: string }): Promise<{ valid: boolean }> {
+    async checkUpdatePath(options: { path: string }): Promise<{ valid: boolean }> {
         console.log(options);
         return undefined;
     }
