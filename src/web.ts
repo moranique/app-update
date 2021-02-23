@@ -9,6 +9,11 @@ export class AppUpdatePluginWeb extends WebPlugin implements AppUpdatePluginPlug
         });
     }
 
+    async checkUpdate(options: { path: string }): Promise<{ valid: boolean }> {
+        console.log(options);
+        return undefined;
+    }
+
     async copyAndExtractFile(options: { fileName: string; updateVersion: string }): Promise<{ updateUrl: string; updateStatus: string }> {
         console.log(options);
         return undefined;

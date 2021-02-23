@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.getcapacitor.Bridge;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.NativePlugin;
 import com.getcapacitor.Plugin;
@@ -46,6 +47,17 @@ public class AppUpdatePlugin extends Plugin {
 
         JSObject ret = new JSObject();
         ret.put("value", value);
+        call.resolve(ret);
+    }
+
+    @PluginMethod()
+    public void checkUpdate(PluginCall call) {
+        String path = call.getString("path");
+        String realPath = path.replace(Bridge.CAPACITOR_FILE_START, "");
+        File localFile = new File(realPath);
+
+        JSObject ret = new JSObject();
+        ret.put("valid", localFile.exists());
         call.resolve(ret);
     }
 

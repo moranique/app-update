@@ -9,6 +9,11 @@ declare module "@capacitor/core" {
 export interface AppUpdatePluginPlugin {
 
     /**
+     * check update bundle if valid
+     */
+    checkUpdate(options: { path: string }): Promise<{ valid: boolean }>;
+
+    /**
      * Get device info
      */
     getAppInfo(): Promise<AppInfoModal>;
