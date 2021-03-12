@@ -15,6 +15,20 @@ public class AppUpdatePlugin: CAPPlugin {
             "value": value
         ])
     }
+    
+    @objc func checkUpdatePath(_ call: CAPPluginCall) {
+        // const path = platform === "ios" ? appInfo.updateVersion : appInfo.updateUrl
+        let updateVersion: String = call.getString("path") ?? ""
+        
+        let documentsUrl =  FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first!
+        let updateUrl = documentsUrl.appendingPathComponent("NoCloud/ionic_built_snapshots/" + updateVersion + "/www/index.html")
+        
+        let exists = FileManager().fileExists(atPath: updateUrl.path)
+
+        call.resolve([
+            "valid": exists
+        ])
+    }
 
     @objc func getAppInfo(_ call: CAPPluginCall) {
         let documentsUrl =  FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first!
