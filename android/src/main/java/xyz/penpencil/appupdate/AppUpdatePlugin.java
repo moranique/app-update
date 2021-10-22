@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.getcapacitor.Bridge;
 import com.getcapacitor.JSObject;
-import com.getcapacitor.NativePlugin;
+import com.getcapacitor.annotation.CapacitorPlugin;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
@@ -34,7 +34,7 @@ import java.util.zip.ZipInputStream;
 
 import static android.content.Context.DOWNLOAD_SERVICE;
 
-@NativePlugin()
+@CapacitorPlugin
 public class AppUpdatePlugin extends Plugin {
     private static final String TAG = "AppUpdatePlugin";
     private static final int BUFFER_SIZE = 4096;
