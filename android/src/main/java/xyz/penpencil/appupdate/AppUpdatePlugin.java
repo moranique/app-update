@@ -163,7 +163,7 @@ public class AppUpdatePlugin extends Plugin {
         try {
             String fileUrl = call.getString("fileUrl"); // downloadable URL
             String fileName = call.getString("fileName"); // fileName.zip
-
+            Toast.makeText(getActivity().getApplicationContext(), "업데이트 중입니다. 잠시만 기다려주세요.", Toast.LENGTH_LONG).show();
             getActivity().registerReceiver(onDownloadComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
             File file = new File(getActivity().getApplicationContext().getExternalFilesDir(null), fileName);
@@ -200,7 +200,7 @@ public class AppUpdatePlugin extends Plugin {
             //Checking if the received broadcast is for our enqueued download by matching download id
             if (downloadID == id) {
 
-                Toast.makeText(getActivity().getApplicationContext(), "Update downloaded", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "업데이트가 완료되었습니다.", Toast.LENGTH_SHORT).show();
                 notifyListeners("appUpdateDownloaded", null);
 
                 JSObject jsObject = new JSObject();
