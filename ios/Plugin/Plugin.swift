@@ -16,15 +16,27 @@ public class AppUpdatePlugin: CAPPlugin {
         ])
     }
     
+    @objc func setServerBasePathForIOS(_ call: CAPPluginCall) {
+        let updateVersion: String = call.getString("path") ?? ""
+        
+        let documentsUrl =  FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first!
+        let updateUrl = documentsUrl.appendingPathComponent("NoCloud/ionic_built_snapshots/" + updateVersion)
+        let path = updateUrl.path.replacingOccurrences(of: "file://", with: "")
+        
+        let vc = bridge.viewController as! CAPBridgeViewController
+        vc.setServerBasePath(path: path)
+        call.success()
+    }
+    
     @objc func checkUpdatePath(_ call: CAPPluginCall) {
         // const path = platform === "ios" ? appInfo.updateVersion : appInfo.updateUrl
         let updateVersion: String = call.getString("path") ?? ""
         
         let documentsUrl =  FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first!
-        let updateUrl = documentsUrl.appendingPathComponent("NoCloud/ionic_built_snapshots/" + updateVersion + "/www/index.html")
+        let updateUrl = documentsUrl.appendingPathComponent("NoCloud/ionic_built_snapshots/" + updateVersion + "/index.html")
         
         let exists = FileManager().fileExists(atPath: updateUrl.path)
-
+        
         call.resolve([
             "valid": exists
         ])
