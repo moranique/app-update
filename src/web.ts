@@ -1,5 +1,5 @@
-import {WebPlugin} from '@capacitor/core';
-import {AppInfoModal, AppUpdatePluginPlugin} from './definitions';
+import { registerWebPlugin, WebPlugin } from '@capacitor/core';
+import { AppInfoModal, AppUpdatePluginPlugin } from './definitions';
 
 export class AppUpdatePluginWeb extends WebPlugin implements AppUpdatePluginPlugin {
     constructor() {
@@ -7,6 +7,11 @@ export class AppUpdatePluginWeb extends WebPlugin implements AppUpdatePluginPlug
             name: 'AppUpdatePlugin',
             platforms: ['web']
         });
+    }
+    
+    async setServerBasePathForIOS(options: { path: string }): Promise<{ valid: boolean }>{
+        console.log(options);
+        return undefined;
     }
 
     async checkUpdatePath(options: { path: string }): Promise<{ valid: boolean }> {
@@ -36,8 +41,7 @@ export class AppUpdatePluginWeb extends WebPlugin implements AppUpdatePluginPlug
 
 const AppUpdatePlugin = new AppUpdatePluginWeb();
 
-export {AppUpdatePlugin};
+export { AppUpdatePlugin };
 
-import {registerWebPlugin} from '@capacitor/core';
 
 registerWebPlugin(AppUpdatePlugin);

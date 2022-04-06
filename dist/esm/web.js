@@ -7,12 +7,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { WebPlugin } from '@capacitor/core';
+import { registerWebPlugin, WebPlugin } from '@capacitor/core';
 export class AppUpdatePluginWeb extends WebPlugin {
     constructor() {
         super({
             name: 'AppUpdatePlugin',
             platforms: ['web']
+        });
+    }
+    setServerBasePathForIOS(options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(options);
+            return undefined;
         });
     }
     checkUpdatePath(options) {
@@ -47,6 +53,5 @@ export class AppUpdatePluginWeb extends WebPlugin {
 }
 const AppUpdatePlugin = new AppUpdatePluginWeb();
 export { AppUpdatePlugin };
-import { registerWebPlugin } from '@capacitor/core';
 registerWebPlugin(AppUpdatePlugin);
 //# sourceMappingURL=web.js.map

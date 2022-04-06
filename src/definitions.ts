@@ -11,7 +11,7 @@ export interface AppUpdatePluginPlugin {
     /**
      * Set update file path for IOS
      */
-     setServerBasePathForIOS(options: { path: string }): Promise<{ valid: boolean }>;
+    setServerBasePathForIOS(options: { path: string }): Promise<{ valid: boolean }>;
 
     /**
      * check update bundle path if valid

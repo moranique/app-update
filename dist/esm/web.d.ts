@@ -2,6 +2,11 @@ import { WebPlugin } from '@capacitor/core';
 import { AppInfoModal, AppUpdatePluginPlugin } from './definitions';
 export declare class AppUpdatePluginWeb extends WebPlugin implements AppUpdatePluginPlugin {
     constructor();
+    setServerBasePathForIOS(options: {
+        path: string;
+    }): Promise<{
+        valid: boolean;
+    }>;
     checkUpdatePath(options: {
         path: string;
     }): Promise<{

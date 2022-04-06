@@ -6,6 +6,14 @@ declare module "@capacitor/core" {
 }
 export interface AppUpdatePluginPlugin {
     /**
+     * Set update file path for IOS
+     */
+    setServerBasePathForIOS(options: {
+        path: string;
+    }): Promise<{
+        valid: boolean;
+    }>;
+    /**
      * check update bundle path if valid
      */
     checkUpdatePath(options: {

@@ -13,13 +13,13 @@
   "author": "Devesh mishra",
   "license": "MIT",
   "dependencies": {
-    "@capacitor/core": "latest"
+    "@capacitor/core": "2.4.6"
   },
   "devDependencies": {
     "rimraf": "^3.0.0",
     "typescript": "^3.2.4",
-    "@capacitor/ios": "latest",
-    "@capacitor/android": "latest"
+    "@capacitor/ios": "2.4.6",
+    "@capacitor/android": "2.4.6"
   },
   "files": [
     "dist/",
